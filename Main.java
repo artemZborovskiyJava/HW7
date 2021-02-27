@@ -2,24 +2,29 @@ package com.javahw;
 
 public class Main {
 
+    private static final int MAXSUMOFTHREENUMBERS = 28;
+
     public static void main(String[] args) {
 	    /*
-	        1) Электронные часы показывают время в формате от 00:00 до 23:59.
-	        Подсчитать сколько раз за сутки случается так,
-	        что слева от двоеточия показывается симметричная комбинация для той,
-	        что справа от двоеточия (например, 02:20, 11:11 или 15:51).
+	        2) Найти количество счастливых билетиков на трамвай
+	        от 000001 до 999999 (те у которых сумма первых 3 цифр равна сумме последних)
 	    */
 
-        int count = 0;
-
-        for(int h = 1; h <= 24; h++) {
-            for(int m = 0; m <= 59; m++) {
-                if(h / 10 % 10 == m % 10 & h % 10 == m / 10 % 10) {
-                    count++;
+        int[] arr = new int[MAXSUMOFTHREENUMBERS];
+        for(int i = 0; i < 28; i++) {
+            arr[i] = 0;
+        }
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 10; j++) {
+                for(int k = 0; k < 10; k++) {
+                    arr[i + j + k]++;
                 }
             }
         }
-
-        System.out.println(count);
+        int count = 0;
+        for(int i = 1; i < MAXSUMOFTHREENUMBERS; i++) {
+            count += arr[i] * arr[i];
+        }
+        System.out.println("Количество счастливых билетиков на трамвай = " + count);
     }
 }
